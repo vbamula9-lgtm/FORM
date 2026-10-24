@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0512;
+            --accent-hot: #ff2a6d;
+            --accent-glow: #ff0055;
+            --accent-gold: #ffb703;
+            --glass-bg: rgba(22, 11, 36, 0.65);
+            --glass-border: rgba(255, 42, 109, 0.25);
+            --text-main: #f3f0f7;
+            --text-muted: #a093b5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 15% 15%, #2a0845 0%, #0a0512 45%),
+                        radial-gradient(circle at 85% 85%, #641220 0%, #0a0512 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: 10%;
+            left: 15%;
+            background: var(--accent-glow);
+            opacity: 0.3;
+        }
+
+        body::after {
+            bottom: 10%;
+            right: 15%;
+            background: #ff5e00;
+            opacity: 0.25;
+        }
+
+        .form-card {
+            width: 100%;
+            max-width: 480px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6),
+                        0 0 30px rgba(255, 42, 109, 0.15);
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            letter-spacing: 4px;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-hot) 50%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 42, 109, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(10, 5, 18, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            appearance: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        input[type="email"]:focus,
+        select:focus {
+            border-color: var(--accent-hot);
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.4),
+                        inset 0 0 10px rgba(255, 42, 109, 0.1);
+            background: rgba(20, 8, 35, 0.8);
+        }
+
+        ::placeholder {
+            color: rgba(160, 147, 181, 0.4);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '▾';
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-hot);
+            pointer-events: none;
+            font-size: 1.2rem;
+        }
+
+        select option {
+            background-color: #120721;
+            color: var(--text-main);
+            padding: 10px;
+        }
+
+        .subscription-section {
+            margin-top: 28px;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .radio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .radio-grid input[type="radio"] {
+            display: none;
+        }
+
+        .radio-grid label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 8px;
+            background: rgba(10, 5, 18, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            text-align: center;
+            margin: 0;
+        }
+
+        .radio-grid label:hover {
+            border-color: rgba(255, 42, 109, 0.5);
+            color: #fff;
+        }
+
+        .radio-grid input[type="radio"]:checked + label {
+            background: linear-gradient(135deg, rgba(255, 42, 109, 0.2), rgba(255, 183, 3, 0.15));
+            border-color: var(--accent-hot);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .radio-grid input[value="VIP"]:checked + label {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(255, 183, 3, 0.4);
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 30px;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-hot) 0%, #d6004c 100%);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 42, 109, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(255, 42, 109, 0.6);
+            background: linear-gradient(135deg, #ff407c 0%, var(--accent-hot) 100%);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <h1>Form</h1>
+        <form action="/submit.php">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="ENTER NAME" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ph">Phone Number</label>
+                <input id="ph" name="phone" type="tel" placeholder="ENTER PHONE NUMBER" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="ENTER E-MAIL" required>        
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <div class="select-wrapper">
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>SELECT GENDER</option>
+                        <option value="male">MALE</option>
+                        <option value="female">FEMALE</option>
+                        <option value="PREFER NOT TO SAY">PREFER NOT TO SAY</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="subscription-section">
+                <p class="section-title">Subscription Plan</p>
+                <div class="radio-grid">
+                    <input id="basic" type="radio" name="subs" value="basic" required>
+                    <label for="basic">BASIC</label>
+
+                    <input id="premium" type="radio" name="subs" value="premium">
+                    <label for="premium">PREMIUM</label>
+
+                    <input id="vip" type="radio" name="subs" value="VIP">
+                    <label for="vip">VIP</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
